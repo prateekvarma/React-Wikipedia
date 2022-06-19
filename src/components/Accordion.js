@@ -8,13 +8,15 @@ const Accordion = (props) => {
   };
 
   const renderedItems = props.items.map((item, index) => {
+    //below, we check if the var 'index' is equal to var 'activeIndex'. If true, means we have the current index & we assign a CSS property to it.
+    const active = index === activeIndex ? 'active' : '';
     return (
       <React.Fragment key={item.title}>
-        <div className="title active" onClick={() => onTitleClick(index)}>
+        <div className={`title ${active}`} onClick={() => onTitleClick(index)}>
           <i className="dropdown icon"></i>
           {item.title}
         </div>
-        <div className="content active">{item.content}</div>
+        <div className={`content ${active}`}>{item.content}</div>
       </React.Fragment>
     );
   });
