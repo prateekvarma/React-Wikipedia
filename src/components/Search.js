@@ -6,10 +6,10 @@ const Search = () => {
   //Testing useEffect() : Below, the console will be called every time the input field is typed, hence the component will be rendered every time, and therefore the console will be logged each time.
   console.log("Called every time you component renders");
 
-  //Below the useEffect has no 2nd params, so it will render at every re-render
+  //Below the useEffect has state var as 2nd param, so it will render at initial render + every (re-render + data change) together 
   useEffect(() => {
-    console.log("Called at initial render, and EVERY single re-render");
-  });
+    console.log("Called at initial render, and EVERY single re-render AND data change");
+  }, [term]);
 
   return (
     <div>
