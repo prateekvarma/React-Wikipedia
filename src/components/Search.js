@@ -2,20 +2,25 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Search = () => {
-  const [term, setTerm] = useState("");
+  const [term, setTerm] = useState("programming"); //initializing with a value, otherwise gives error
+  const [results, setResults] = useState([]);
 
-  //Below the useEffect has state var as 2nd param, so it will render at initial render + every (re-render + data change) together 
+  console.log(results);
+
+  //Below the useEffect has state var as 2nd param, so it will render at initial render + every (re-render + data change) together
   useEffect(() => {
     const search = async () => {
-        await axios.get('https://en.wikipedia.org/w/api.php', {
-            params: {
-                action: 'query',
-                list: 'search',
-                format: 'json',
-                origin: '*',
-                srsearch: term
-            }
-        })
+      //Below, {data} is object destructuring
+      const { data } = await axios.get("https://en.wikipedia.org/w/api.php", {
+        params: {
+          action: "query",
+          list: "search",
+          format: "json",
+          origin: "*",
+          srsearch: term,
+        },
+      });
+      setResults(data.query.search);
     };
     search();
   }, [term]);
