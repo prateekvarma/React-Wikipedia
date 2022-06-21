@@ -5,8 +5,6 @@ const Search = () => {
   const [term, setTerm] = useState("programming"); //initializing with a value, otherwise gives error
   const [results, setResults] = useState([]);
 
-  console.log(results);
-
   //Below the useEffect has state var as 2nd param, so it will render at initial render + every (re-render + data change) together
   useEffect(() => {
     const search = async () => {
@@ -26,6 +24,17 @@ const Search = () => {
   }, [term]);
   //Wikipedia API format: https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&origin=*&srsearch=programming
 
+  const renderedResults = results.map((result) => {
+    return (
+      <div key={result.pageid} className="item">
+        <div className="content">
+          <div className="header">{result.title}</div>
+          {result.snippet}
+        </div>
+      </div>
+    );
+  });
+
   return (
     <div>
       <div className="ui form">
@@ -37,6 +46,9 @@ const Search = () => {
             onChange={(e) => setTerm(e.target.value)}
           />
         </div>
+      </div>
+      <div className="ui celled list">
+        {renderedResults}
       </div>
     </div>
   );
