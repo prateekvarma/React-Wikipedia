@@ -21,9 +21,18 @@ const Search = () => {
       setResults(data.query.search);
     };
 
-    if (term) { //this will remove an error, then the input field is backspaced to blank.
-      search();
-    }
+    const timeoutId = setTimeout(() => {
+      //adds 500ms throttle time when user stops typing
+      if (term) {
+        //this if cond will remove an error, when the input field is backspaced to blank.
+        search();
+      }
+    }, 500);
+
+    //Below, we're using the only thing a useEffect() can return - a cleanup function. This func will be called before the useEffect() func is executed on each re-render, thus will cancel the setTimeout() function above, preventing a premature API request. This is necessary for throttle time to work.
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [term]);
   //Wikipedia API format: https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&origin=*&srsearch=programming
 
