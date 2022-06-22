@@ -6,14 +6,19 @@ const Dropdown = (props) => {
 
   //Below,the useEffect is configured to run only on initialization, but it will still execute on each click, bcoz it's expected behavior for addEventListener to continue.
   useEffect(() => {
-    document.body.addEventListener("click", (event) => {
-      if (ref.current.contains(event.target)) {
-        //if dropdown is clicked, do not execute setOpen()
-        return;
-      }
-      //Below, setting state var as false, because with this, the dropdown will now close when any part of the 'body' is clicked
-      setOpen(false);
-    });
+    const onBodyClick = (event) => {
+        if (ref.current.contains(event.target)) {
+          //if dropdown is clicked, do not execute setOpen()
+          return;
+        }
+        //Below, setting state var as false, because with this, the dropdown will now close when any part of the 'body' is clicked
+        setOpen(false);
+      };
+    document.body.addEventListener("click", onBodyClick);
+    return () => {
+        //cleanup function which runs when the 'Dropdown' component is removed from DOM
+        document.body.removeEventListener("click", onBodyClick);
+    }
   }, []);
 
   const renderedOptions = props.options.map((option) => {
