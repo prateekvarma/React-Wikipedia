@@ -40,6 +40,7 @@ const App = () => {
     <div>
       <Translate />
       <Dropdown
+        label="Select a color"
         selected={selected} //state variable as prop
         onSelectedChange={setSelected} // state setter as prop
         options={options}

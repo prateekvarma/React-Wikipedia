@@ -21,6 +21,7 @@ const Translate = () => {
   return (
     <div>
       <Dropdown //The props provided here should match how it's extracted in the Dropdow.js component
+        label="Select a language"
         selected={language}
         onSelectedChange={setLanguage}
         options={options}
