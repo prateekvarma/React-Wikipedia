@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Accordion from "./components/Accordion";
 import Search from "./components/Search";
 import Dropdown from "./components/Dropdown";
+import Translate from "./components/Translate";
 
 const items = [
   {
@@ -37,6 +38,7 @@ const App = () => {
   const [selected, setSelected] = useState(options[0]); //passing 1st object as default
   return (
     <div>
+      <Translate />
       <Dropdown
         selected={selected} //state variable as prop
         onSelectedChange={setSelected} // state setter as prop
