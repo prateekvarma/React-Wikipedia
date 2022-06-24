@@ -18,8 +18,16 @@ const options = [
 
 const Translate = () => {
   const [language, setLanguage] = useState(options[0]);
+  const [text, setText] = useState("");
+
   return (
     <div>
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Text to Translate :</label>
+          <input value={text} onChange={(e) => setText(e.target.value)} />
+        </div>
+      </div>
       <Dropdown //The props provided here should match how it's extracted in the Dropdow.js component
         label="Select a language"
         selected={language}
